@@ -43,7 +43,7 @@ package leetcode.editor.cn;
 import java.util.Arrays;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution455 {
     /**
      * 对每个孩子的胃口和饼干的尺寸进行排序
      * 使用双指针
