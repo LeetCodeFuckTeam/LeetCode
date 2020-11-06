@@ -1,4 +1,4 @@
-//给定一个以字符串表示的非负整数 num，移除这个数中的 k 位数字，使得剩下的数字最小。 
+package leetcode.editor.cn;//给定一个以字符串表示的非负整数 num，移除这个数中的 k 位数字，使得剩下的数字最小。
 //
 // 注意: 
 //
@@ -38,7 +38,7 @@ import com.sun.org.apache.bcel.internal.generic.ARETURN;
 import java.util.Stack;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution402 {
 
     /**
      * 分析:
@@ -89,7 +89,7 @@ class Solution {
         }
 
         /**
-         * 栈中的数据从栈底向栈顶遍历输出拼接结果  
+         * 栈中的数据从栈底向栈顶遍历输出拼接结果
          */
         char[] chars1 = result.toCharArray();
         StringBuilder sb = new StringBuilder();
@@ -120,10 +120,6 @@ class Solution {
 
 
 
-    public static void main(String args[]) {
-        Solution s = new Solution();
-        String s1 = "1432219";
-        s.removeKdigits(s1,3);
-    }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
