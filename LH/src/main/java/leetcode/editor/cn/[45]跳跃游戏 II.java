@@ -32,7 +32,7 @@ class Solution45 {
      *
      *
      * 如果在跳跃过程中i表示当前预跳跃的位置
-     * 小于pre_max_max_index的就要更新pre_max_max_index
+     * pre_max_max_index的小于预跳跃点可跳跃最大位置就要更新pre_max_max_index
      * @param nums
      * @return
      */
@@ -44,15 +44,16 @@ class Solution45 {
         int pre_max_max_index = nums[0];
         int min_jump = 1;
         for (int i = 1; i < nums.length; i++) {
+            if(pre_max_max_index<nums[i]+i) {
+            pre_max_max_index = nums[i]+i;
+        }
             if(i>current_max_index) {
                 //表示此时无法跳跃的点之前必存在可跳跃的位置
                 min_jump++;
                 //更新当前可跳跃的最远位置
                 current_max_index = pre_max_max_index;
             }
-            if(pre_max_max_index<nums[i]+i) {
-                pre_max_max_index = nums[i]+i;
-            }
+
         }
         return min_jump;
 
