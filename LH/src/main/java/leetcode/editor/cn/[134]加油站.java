@@ -83,6 +83,7 @@ class Solution134 {
                 capacity = differ[i];//剩余油量
                 i = (i+1)%gas.length;
                 while (capacity>0&&i!=start) {
+                    //上一个加油站的capacity>=0才能进入循环到达当前加油站
                     capacity += differ[i];//剩余油量
                     i = (i+1)%gas.length;
                 }
