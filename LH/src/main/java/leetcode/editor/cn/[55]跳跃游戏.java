@@ -21,7 +21,7 @@ package leetcode.editor.cn;//给定一个非负整数数组，你最初位于数
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution55 {
     /**
      * 分析：
      * 从当前跳跃点开始跳跃
