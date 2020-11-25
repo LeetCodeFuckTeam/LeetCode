@@ -59,7 +59,7 @@ package leetcode.editor.cn;//给你一个数组 events，其中 events[i] = [sta
 import java.util.*;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution1353 {
     /**
      * 贪心算法
      * 和活动安排问题相似
