@@ -25,7 +25,7 @@ package leetcode.editor.cn;//给定一个非负整数 N，找出小于或等于 
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution738 {
     /**
      *
      * 贪心算法

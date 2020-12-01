@@ -49,7 +49,7 @@ package leetcode.editor.cn;//给你一个按升序排序的整数数组 num（�
 import java.util.HashMap;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution659 {
     /**
      * 遍历数组中的每一个元素
      * 随着hashmap的变化动态构造chain
