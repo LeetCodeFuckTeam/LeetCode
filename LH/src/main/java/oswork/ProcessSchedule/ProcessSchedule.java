@@ -2,6 +2,7 @@ package oswork.ProcessSchedule;
 
 import java.util.*;
 
+
 public class ProcessSchedule
 {
 
@@ -48,7 +49,7 @@ public class ProcessSchedule
                     int periodTime = scanner.nextInt();
                     RR(processes,periodTime);
                     Print(endQueue);
-            }catch (Exception e){
+                }catch (Exception e){
                     e.printStackTrace();
                 }
 
@@ -78,6 +79,7 @@ public class ProcessSchedule
      * FCFS算法
      */
     public static void FCFS(Process[] processes) {
+        //按照进程到达时间从小到大进行排序
         Arrays.sort(processes, new Comparator<Process>() {
             @Override
             public int compare(Process o1, Process o2) {
@@ -91,12 +93,15 @@ public class ProcessSchedule
             }
         });
 
+        //将所有进程加入到就绪队列
         for (Process process : processes) {
             readyQueue.add(process);
         }
 
+        //遍历就绪队列
         Iterator<Process> iterator = readyQueue.iterator();
         Process firstProcess = iterator.next();
+        //逐个执行进程并进行计算
         firstProcess.setStartTime(firstProcess.getReachTime());
         firstProcess.setFinishTime(firstProcess.getStartTime()+firstProcess.getProcessTime());
         firstProcess.setPeriodTime(firstProcess.getFinishTime()-firstProcess.getStartTime());
@@ -128,31 +133,33 @@ public class ProcessSchedule
         //计算高响应比
         Process maxProcess = null;
 
+        //所有进程还未执行完毕时间片循环增加
         while(endQueue.size()<processes.length) {
-
-           if(readyQueue.size() == 0 && maxProcess == null) {
-               time++;
-               checkReachProcess(processes,time);
-               break;
-           }
-
-            if(!flag) {
-                 maxProcess = executeHRN(time);
+            //就绪队列为空时间片增加并检测到达进程
+            if(readyQueue.size() == 0 && maxProcess == null) {
+                time++;
+                checkReachProcess(processes,time);
+                break;
             }
 
-           if(maxProcess == null) {
-               time++;
-               checkReachProcess(processes,time);
-               break;
-           }
-           flag = true;
-           int processTime = maxProcess.getProcessTime();
-           if(maxProcess.getExeTime() == 0) {
-               maxProcess.setStartTime(time);
-           }
+            if(!flag) {
+                //新的时间片执行新的进程
+                maxProcess = executeHRN(time);
+            }
+
+            if(maxProcess == null) {
+                time++;
+                checkReachProcess(processes,time);
+                break;
+            }
+            flag = true;
+            int processTime = maxProcess.getProcessTime();
+            if(maxProcess.getExeTime() == 0) {
+                maxProcess.setStartTime(time);
+            }
             int exeTime = maxProcess.getExeTime();
             maxProcess.setExeTime(++exeTime);
-
+            //进程系统执行时间等于系统服务时间进程执行完毕
             if(exeTime == processTime) {
                 maxProcess.setFinishTime(time + 1);
                 maxProcess.setPeriodTime(maxProcess.getFinishTime()-maxProcess.getReachTime());
@@ -164,7 +171,7 @@ public class ProcessSchedule
 
 
             }
-            time++;
+            time++;//时间片增加
             checkReachProcess(processes,time);
         }
 
@@ -183,13 +190,16 @@ public class ProcessSchedule
         for (Process process : readyQueue) {
             int reachTime = process.getReachTime();
             int processTime = process.getProcessTime();
-            int hrnTime = ((time + processTime) - reachTime)/processTime;
+            int hrnTime = ((time + processTime) - reachTime)/processTime;  //计算高响应比
             if(hrnTime >= maxHrnTime) {
+                //更新最高响应比
                 maxHrnTime = hrnTime;
                 maxProcess = process;
             }
         }
+        //就绪队列内移除执行进程
         readyQueue.remove(maxProcess);
+        //返回响应比最高的进程
         return maxProcess;
     }
 
@@ -232,6 +242,7 @@ public class ProcessSchedule
      */
     public static void checkSJFReadyProcess(Process[] processes,int time) {
         for (Process process : processes) {
+            //检测是否进程是否到达
             if(process.getReachTime() == time) {
                 readySet.add(process);
             }
@@ -284,12 +295,12 @@ public class ProcessSchedule
      */
     public static  void checkReachProcess(Process[] processes,int time) {
 
-            for (Process process : processes) {
-                if(process.getReachTime() == time) {
-                    //加入到就绪队列尾部
-                    readyQueue.offer(process);
-                }
+        for (Process process : processes) {
+            if(process.getReachTime() == time) {
+                //加入到就绪队列尾部
+                readyQueue.offer(process);
             }
+        }
 
     }
 
@@ -333,8 +344,11 @@ public class ProcessSchedule
     }
 
 
-
-
+    /**
+     * 计算平均周转时间
+     * @param endQueue
+     * @return
+     */
     public static double Avg_ProcessTime(Collection endQueue){
         //平均周转时间
         double avg = 0;
@@ -347,6 +361,11 @@ public class ProcessSchedule
         return avg;
     }
 
+    /**
+     * 计算带权平均周转时间
+     * @param endQueue
+     * @return
+     */
     public static double Avg_WeightedProcessTime(Collection endQueue){
         //平均带权周转时间
         double avg = 0;

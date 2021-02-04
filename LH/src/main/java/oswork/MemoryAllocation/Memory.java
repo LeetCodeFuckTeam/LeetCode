@@ -66,12 +66,19 @@ public class Memory {
 
 
     }
+
+    /**
+     * 执行分配
+     * @param location
+     * @param size
+     * @param tmp
+     */
     private void doAllocate(int location,int size,Block tmp) {
         if((tmp.size - size) < minBlockSize) {
             //防止产生过多内存碎片  直接分配
             tmp.isFree = false;
         }else {
-
+            //内存块切分
             blockList.add(location + 1,new Block(tmp.head + size,tmp.size - size));
             tmp.size = size;
             tmp.isFree = false;
