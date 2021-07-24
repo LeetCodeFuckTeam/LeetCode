@@ -41,6 +41,7 @@ class Solution209 {
             while (sum >= target) {
                 len = len == 0 ? right - left + 1 : Math.min(len, right - left + 1);
                 //左边界向右移动的过程中是必然从满足的结果走向不满足的结果势必再次造成右边界右移，所以左边界始终小于右边界
+                //滑动窗口左边界的右移动必然会出现窗口大小为0
                 sum -= nums[left++];
             }
             right++;
