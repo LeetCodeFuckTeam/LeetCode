@@ -74,6 +74,6 @@ public class seg_tree {
         int sum = queryTree(arr, tree, 0, 0, arr.length - 1, 0, 2);
         System.out.println(sum);
 
-        
+
     }
 }
