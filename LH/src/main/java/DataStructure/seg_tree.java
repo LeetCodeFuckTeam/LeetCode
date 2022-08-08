@@ -1,6 +1,5 @@
 package DataStructure;
 
-import org.apache.xpath.objects.XNodeSet;
 
 //线段树（数组存储）
 public class seg_tree {
